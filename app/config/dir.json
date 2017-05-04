@@ -1,0 +1,10 @@
+{
+
+    "cwd": "",
+    "app": "app",
+    "config": "app/config",
+    "controller": "app/controller",
+    "appService": "app/lib/service",
+    "src": "src"
+
+}

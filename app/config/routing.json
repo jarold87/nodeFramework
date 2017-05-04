@@ -1,0 +1,6 @@
+{
+
+  "app/info": "app/index::showInfo",
+  "app/db": "app/dbTest::test"
+
+}

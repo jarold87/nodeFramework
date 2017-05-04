@@ -1,0 +1,19 @@
+{
+
+  "serverTimeZone": "UTC",
+
+  "outTimeZone": "Europe/Budapest",
+
+  "appServices": {
+
+    "file": true,
+    "time": true,
+    "childProcess": true,
+    "mongo": true,
+    "auth": true,
+    "http": true,
+    "stream": true
+
+  }
+
+}

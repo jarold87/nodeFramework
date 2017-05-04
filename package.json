@@ -1,0 +1,34 @@
+{
+  "name": "my-node-framework",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Kassai Gabor",
+  "license": "ISC",
+  "dependencies": {
+    "MD5": "^1.3.0",
+    "async": "^2.0.0-rc.5",
+    "basic-auth": "^1.1.0",
+    "body-parser": "^1.14.2",
+    "cors": "^2.7.1",
+    "date": "^1.0.2",
+    "event-stream": "^3.3.4",
+    "events": "^1.1.0",
+    "express": "^4.13.3",
+    "file": "^0.2.2",
+    "fs": "0.0.2",
+    "json2csv": "^3.4.2",
+    "lupus": "0.0.1",
+    "md5": "^2.2.1",
+    "mongodb": "^2.1.19",
+    "morgan": "^1.8.1",
+    "newrelic": "^1.27.2",
+    "node-dir": "^0.1.12",
+    "path": "^0.12.7",
+    "timezonecomplete": "^3.0.3",
+    "unidecode": "^0.1.8"
+  }
+}
