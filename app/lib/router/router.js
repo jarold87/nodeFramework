@@ -1,3 +1,5 @@
+var bodyParser = require('body-parser');
+
 module.exports = {
 
     lupus: require('lupus'),
@@ -108,7 +110,7 @@ module.exports = {
                 && Object.keys(that.container.Create.getController(controller + '.js')).indexOf(method) > -1
             ) {
                 var handler = that.container.Property.controllers[controller + '.js'][method];
-                that.serverData.app.get('/' + path, handler);
+                that.serverData.app.all('/' + path, bodyParser.json(), handler);
             } else {
                 console.log('No route: ' + path + ' -> ' + routingConfig[path] );
             }
