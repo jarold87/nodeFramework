@@ -1,8 +1,5 @@
 module.exports = function (container) {
 
-    var bodyParser = require('body-parser');
-
-    var app = container.getApp();
     var Response = container.getService('app/response');
     var Time = container.getService('time');
 

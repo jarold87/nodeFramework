@@ -1,12 +1,8 @@
 module.exports = function (container) {
 
-    var bodyParser = require('body-parser');
-
-    var app = container.getApp();
     var Response = container.getService('app/response');
 
     var mongodbClient = container.getService('mongo').client;
-    var mongoRepository = container.getService('mongo').repository;
     var mongoDbConfig = container.getConfig('mongo');
 
     container.getService('auth').setPublic('^/app/db$');
