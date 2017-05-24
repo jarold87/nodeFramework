@@ -60,7 +60,7 @@ module.exports = {
 
     fileIsExist: function (path, callback) {
         this.fs.stat(path, function(err, stats) {
-            if (!err && stats.isFile() && stats.size === 0) {
+            if (!err && stats.isFile() && stats.size !== 0) {
                 callback(true);
             } else {
                 callback(false);
