@@ -31,6 +31,7 @@
     "node-minify": "^2.0.3",
     "path": "^0.12.7",
     "timezonecomplete": "^3.0.3",
-    "unidecode": "^0.1.8"
+    "unidecode": "^0.1.8",
+    "stream-service": "git+ssh://git@gitlab.innonic.com:viktorsimko/stream-service.git"
   }
 }
