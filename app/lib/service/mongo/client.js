@@ -21,6 +21,11 @@ MongoDbClient.prototype = {
             this.client = this.mongo.MongoClient;
         }
         this.client.connect(url, function (err, db) {
+            if (err) {
+                try { db.close(); } catch (err) {}
+                console.error(new Date().toISOString() + ' MongoDb get connection error (' + db + ')');
+                return callback(err, null);
+            }
             callback(err, db);
         });
     }
