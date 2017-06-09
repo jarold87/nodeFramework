@@ -13,6 +13,7 @@
     "async": "^2.0.0-rc.5",
     "basic-auth": "^1.1.0",
     "body-parser": "^1.14.2",
+    "compression": "^1.6.2",
     "cors": "^2.7.1",
     "date": "^1.0.2",
     "event-stream": "^3.3.4",
@@ -27,6 +28,7 @@
     "morgan": "^1.8.1",
     "newrelic": "^1.27.2",
     "node-dir": "^0.1.12",
+    "node-minify": "^2.0.3",
     "path": "^0.12.7",
     "timezonecomplete": "^3.0.3",
     "unidecode": "^0.1.8"

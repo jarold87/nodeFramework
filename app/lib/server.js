@@ -15,6 +15,7 @@ function Server(env, port) {
     this.app = this.express();
 
     this.bootstrap = require(__dirname + '/bootstrap.js');
+    this.middleware = require(__dirname + '/middleware.js');
 
     this.env = env;
     this.port = port;
@@ -30,7 +31,8 @@ Server.prototype.createServer = function() {
         port: server.port,
         app: server.app
     });
-    server.bootstrap.bootServer(function() {
+    server.bootstrap.bootServer(()  => {
+        this.app.use(this.middleware.handleOnAborted);
         server.setListen();
     });
     
@@ -48,6 +50,11 @@ Server.prototype.setListen = function() {
             console.log('controllers: ' + that.bootstrap.getControllers());
         }
     });
+    var dir = that.path.dirname(that.path.dirname(__dirname)) + '/public';
+    var compress = require('compression');
+    that.app.use('/public', compress());
+    that.app.use('/public', that.express.static(dir, { maxAge: 86400000 }));
+    // x / 1000ms / 60s / 60m = 24h
 
 };
 
