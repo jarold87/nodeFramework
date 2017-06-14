@@ -1,5 +1,6 @@
 {
 
-    "app/info": ["app/testMiddleware", "app/aMiddleware"]
+    "*": ["app/aMiddleware"],
+    "app/info": ["app/testMiddleware"]
 
 }
