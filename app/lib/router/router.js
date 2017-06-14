@@ -12,6 +12,7 @@ module.exports = {
     container: null,
     dependencyInjections: null,
     controllers: null,
+    middlewares: null,
 
     createRouting: function(serverData, container, callback) {
 
@@ -26,6 +27,15 @@ module.exports = {
                     that.container.Create.setDependencyInjections(dependencyInjections);
                     callback();
                 })
+            },
+            function (callback) {
+                that.loadMiddlewares((middlewares) => {
+                    that.middlewares = middlewares;
+                    callback();
+                });
+            },
+            function (callback) {
+                that.bindMiddlewares(callback);
             },
             function (callback) {
                 that.loadControllers(function(controllers) {
@@ -75,6 +85,32 @@ module.exports = {
             });
         });
 
+    },
+
+    loadMiddlewares: function(callback) {
+        var middlewares = {};
+        var srcDir = this.fullPath('src');
+        this.file.searchFiles(srcDir, 'middleware', (files) => {
+            this.lupus(0, Object.keys(files).length, (i) => {
+                let middleware = require(files[i].path);
+                let packageName = this.getPackageName(files[i].path, 'middleware');
+                middlewares[packageName + '/' + files[i].name] = middleware;
+            }, () => callback(middlewares));
+        });
+    },
+
+    bindMiddlewares: function (callback) {
+        var middlewareConfig = require(this.fullPath('app/config/middleware.json'));
+        var routes = Object.keys(middlewareConfig);
+
+        this.async.eachSeries(routes, (route, routeCallback) => {
+            var middlewares = middlewareConfig[route];
+            this.async.eachSeries(middlewares, (middleware, middlewareCallback) => {
+                var actualMiddleware = this.middlewares[middleware + '.js'];
+                this.serverData.app.use('/' + route, actualMiddleware);
+                middlewareCallback();
+            }, routeCallback);
+        }, callback);
     },
 
     loadControllers: function(callback) {
