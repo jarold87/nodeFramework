@@ -1,6 +1,6 @@
 {
 
-    "*": ["app/aMiddleware"],
+    "*": ["app/globalMiddleware"],
     "app/info": ["app/testMiddleware"]
 
 }
