@@ -73,13 +73,18 @@ Container.Private = {
 
     requireAppService: function(name) {
         var servicePath;
+        var nameComponents = name.split('/');
+        var serviceName = nameComponents[0] + '-service';
+
+        if (nameComponents.length > 1) {
+            serviceName += '/' + nameComponents.slice(1).join('/');
+        }
 
         try {
             servicePath = require.resolve(
                 Container.Property.configs.get('dir').cwd + '/'
-                + 'node_modules/'
-                + name.split('/')[0] + '-service/' + name.split('/')[1]
-            )
+                + 'node_modules/' + serviceName
+            );
         } catch (e) {
             servicePath = Container.Property.configs.get('dir').cwd + '/'
             + Container.Property.configs.get('dir').appService + '/'

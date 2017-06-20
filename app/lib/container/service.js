@@ -31,7 +31,7 @@ module.exports = {
             var serviceName = Object.keys(services)[i];
             var serviceStatus = services[Object.keys(services)[i]];
             if (serviceStatus) {
-                var service = container.Private.requireAppService(serviceName + '/loader')(container);
+                var service = container.Private.requireAppService(serviceName)(container);
                 container.Create.addService(service.name, service.service);
             }
         }
