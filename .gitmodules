@@ -1,0 +1,21 @@
+[submodule "app/lib/service/auth"]
+	path = app/lib/service/auth
+	url = git@gitlab.innonic.com:viktorsimko/auth-service.git
+[submodule "app/lib/service/file"]
+	path = app/lib/service/file
+	url = git@gitlab.innonic.com:viktorsimko/file-service.git
+[submodule "app/lib/service/http"]
+	path = app/lib/service/http
+	url = git@gitlab.innonic.com:viktorsimko/http-service.git
+[submodule "app/lib/service/childProcess"]
+	path = app/lib/service/childProcess
+	url = git@gitlab.innonic.com:viktorsimko/childProcess-service.git
+[submodule "app/lib/service/time"]
+	path = app/lib/service/time
+	url = git@gitlab.innonic.com:viktorsimko/time-service.git
+[submodule "app/lib/service/stream"]
+	path = app/lib/service/stream
+	url = git@gitlab.innonic.com:viktorsimko/stream-service.git
+[submodule "app/lib/service/mongo"]
+	path = app/lib/service/mongo
+	url = git@gitlab.innonic.com:viktorsimko/mongo-service.git
