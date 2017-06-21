@@ -2,7 +2,7 @@ module.exports = {
 
     lupus: require('lupus'),
     path: require("path"),
-    file: require(__dirname + '/../service/file/file.js'),
+    file: require('file-service/file.js'),
     service: require(__dirname + '/obj/service.js'),
 
     loadSrcServices: function (container, callback) {

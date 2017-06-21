@@ -3,7 +3,7 @@ module.exports = {
     lupus: require('lupus'),
     path: require("path"),
     async: require('async'),
-    file: require(__dirname + '/../service/file/file.js'),
+    file: require('file-service/file.js'),
     config: require(__dirname + '/obj/config.js'),
 
     serverData: {},

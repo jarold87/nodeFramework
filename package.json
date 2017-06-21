@@ -34,7 +34,7 @@
     "unidecode": "^0.1.8",
     "auth-service": "git+ssh://git@gitlab.innonic.com:viktorsimko/auth-service.git",
     "childProcess-service": "git+ssh://git@gitlab.innonic.com:viktorsimko/childProcess-service.git",
-
+    "file-service": "git+ssh://git@gitlab.innonic.com:viktorsimko/file-service.git",
     "http-service": "git+ssh://git@gitlab.innonic.com:viktorsimko/http-service.git",
     "mongo-service": "git+ssh://git@gitlab.innonic.com:viktorsimko/mongo-service.git",
     "time-service": "git+ssh://git@gitlab.innonic.com:viktorsimko/time-service.git",
