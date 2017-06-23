@@ -2,7 +2,7 @@ module.exports = {
 
     lupus: require('lupus'),
     path: require("path"),
-    file: require('file-service/file.js'),
+    fileUtils: require('../fileUtils.js'),
     service: require(__dirname + '/obj/service.js'),
 
     loadSrcServices: function (container, callback) {
@@ -10,7 +10,7 @@ module.exports = {
         var that = this;
         var Service = new that.service();
         var srcDir = container.Public.getDir('src');
-        that.file.searchFiles(srcDir, 'service', function(files) {
+        that.fileUtils.getFilesFromSubdirsMatching(srcDir, 'service').then((files) => {
             that.lupus(0, Object.keys(files).length, function(i) {
                 var service = require(files[i].path);
                 var pN = that.getPackageName(files[i].path, 'service');

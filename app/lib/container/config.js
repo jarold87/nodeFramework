@@ -3,7 +3,7 @@ module.exports = {
     lupus: require('lupus'),
     path: require("path"),
     async: require('async'),
-    file: require('file-service/file.js'),
+    fileUtils: require('../fileUtils.js'),
     config: require(__dirname + '/obj/config.js'),
 
     serverData: {},
@@ -37,17 +37,22 @@ module.exports = {
 
         var that = this;
         var dir = 'config';
-        that.file.mapDir(that.fullPath('app/' + dir), function(files) {
-            if (Object.keys(files).length > 0) {
-                that.lupus(0, Object.keys(files).length, function(i) {
-                    var config = require(files[i].path);
-                    Config.set(files[i].name, config);
-                }, function() {
-                    callback(Config);
-                });
-            } else {
-                callback(Config);
+        var fullPath = this.fullPath('app/' + dir);
+
+        that.fileUtils.getFilesFromDir(fullPath).then((files) => {
+            if (files.length === 0) {
+                return callback(Config);
             }
+
+            that.lupus(0, Object.keys(files).length, function(i) {
+                var config = require(files[i].path);
+                Config.set(files[i].name, config);
+            }, function() {
+                callback(Config);
+            });
+        }).catch((e) => {
+            console.log(e);
+            callback(Config);
         });
 
     },
@@ -57,19 +62,24 @@ module.exports = {
         if (this.serverData.env == 'dev') {
             var that = this;
             var dir = 'config/' + that.serverData.env;
-            that.file.mapDir(that.fullPath('app/' + dir), function(files) {
-                if (Object.keys(files).length > 0) {
-                    that.lupus(0, Object.keys(files).length, function(i) {
-                        var config = require(files[i].path);
-                        var original = Config.get(files[i].name.replace('.json', '').replace('.js', ''));
-                        config = that.extend(original, config);
-                        Config.set(files[i].name, config);
-                    }, function() {
-                        callback(Config);
-                    });
-                } else {
-                    callback(Config);
+            var fullPath = that.fullPath('app/' + dir);
+
+            that.fileUtils.getFilesFromDir(fullPath).then((files) => {
+                if (files.length === 0) {
+                    return callback(Config);
                 }
+
+                that.lupus(0, Object.keys(files).length, function(i) {
+                    var config = require(files[i].path);
+                    var original = Config.get(files[i].name.replace('.json', '').replace('.js', ''));
+                    config = that.extend(original, config);
+                    Config.set(files[i].name, config);
+                }, function() {
+                    callback(Config);
+                });
+            }).catch((e) => {
+                console.log(e);
+                callback(Config);
             });
         } else {
             callback(Config);
@@ -81,7 +91,8 @@ module.exports = {
 
         var that = this;
         var srcDir = that.fullPath('src');
-        that.file.searchFiles(srcDir, 'config', function(files) {
+
+        that.fileUtils.getFilesFromSubdirsMatching(srcDir, 'config').then((files) => {
             that.lupus(0, Object.keys(files).length, function(i) {
                 var config = require(files[i].path);
                 var pN = that.getPackageName(files[i].path, 'config');

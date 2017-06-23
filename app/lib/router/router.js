@@ -6,7 +6,7 @@ module.exports = {
     path: require("path"),
     async: require('async'),
 
-    file: require('file-service/file.js'),
+    fileUtils: require('../fileUtils.js'),
 
     serverData: {},
     container: null,
@@ -73,7 +73,7 @@ module.exports = {
         var that = this;
         var dependencyInjection = [];
         var srcDir = that.fullPath('src');
-        that.file.searchFiles(srcDir, 'dependencyInjection', function(files) {
+        that.fileUtils.getFilesFromSubdirsMatching(srcDir, 'dependencyInjection').then((files) => {
             that.lupus(0, Object.keys(files).length, function(i) {
                 require(files[i].path)(
                     that.container.Public
@@ -90,7 +90,7 @@ module.exports = {
     loadMiddlewares: function(callback) {
         var middlewares = {};
         var srcDir = this.fullPath('src');
-        this.file.searchFiles(srcDir, 'middleware', (files) => {
+        this.fileUtils.getFilesFromSubdirsMatching(srcDir, 'middleware').then((files) => {
             this.lupus(0, Object.keys(files).length, (i) => {
                 let middleware = require(files[i].path)(this.container.Public);
                 let packageName = this.getPackageName(files[i].path, 'middleware');
@@ -118,7 +118,7 @@ module.exports = {
         var that = this;
         var controllers = {};
         var srcDir = that.fullPath('src');
-        that.file.searchFiles(srcDir, 'controller', function(files) {
+        that.fileUtils.getFilesFromSubdirsMatching(srcDir, 'controller').then((files) => {
             that.lupus(0, Object.keys(files).length, function(i) {
                 var object = require(files[i].path)(
                     that.container.Public

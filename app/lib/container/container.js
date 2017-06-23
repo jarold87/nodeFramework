@@ -4,7 +4,6 @@ module.exports = {
     path: require("path"),
     async: require('async'),
 
-    file: require('file-service/file.js'),
     config: require(__dirname + '/config.js'),
     service: require(__dirname + '/service.js'),
     container: require(__dirname + '/obj/container.js'),

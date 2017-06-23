@@ -32,6 +32,7 @@
     "path": "^0.12.7",
     "timezonecomplete": "^3.0.3",
     "unidecode": "^0.1.8",
+    "walk": "^2.1.1",
     "auth-service": "git+ssh://git@gitlab.innonic.com:viktorsimko/auth-service.git",
     "childProcess-service": "git+ssh://git@gitlab.innonic.com:viktorsimko/childProcess-service.git",
     "file-service": "git+ssh://git@gitlab.innonic.com:viktorsimko/file-service.git",
